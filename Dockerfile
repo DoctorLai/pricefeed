@@ -1,11 +1,13 @@
-FROM alpine:3.9
+FROM node:20-alpine
 
 WORKDIR /app
 
-RUN apk --no-cache add nodejs npm
+# Install dependencies first so this layer is cached unless the manifests change.
+COPY package*.json ./
+RUN npm install --omit=dev
 
-ADD . /app
-
-RUN npm install
+# Copy the rest of the application source.
+COPY . .
 
 CMD ["node", "feed.js"]
+

@@ -7,10 +7,10 @@
     "test": "node --test",
     "start": "node feed.js",
     "check": "node --check feed.js",
-    "lint": "node --check feed.js",
+    "lint": "for f in feed.js src/*.js test/*.js; do node --check \"$f\" || exit 1; done",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "ci": "node --test && node --check feed.js && prettier --check ."
+    "ci": "npm run lint && npm run test && npm run format"
   },
   "repository": {
     "type": "git",
@@ -24,10 +24,10 @@
   "homepage": "https://github.com/MattyIce/pricefeed#readme",
   "dependencies": {
     "punycode": "^2.3.1",
-    "request": "^2.83.0",
-    "steem": "^0.7.1"
+    "steem": "^0.7.1",
+    "yaml": "^2.9.0"
   },
   "devDependencies": {
-    "prettier": "^3.5.3"
+    "prettier": "^3.8.4"
   }
 }

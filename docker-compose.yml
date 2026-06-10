@@ -1,0 +1,18 @@
+services:
+  pricefeed:
+    build: .
+    image: pricefeed
+    container_name: pricefeed
+    restart: unless-stopped
+    # Secrets are read from the host environment or a local .env file
+    # (copy .env.example to .env). They can also be placed directly in
+    # config.yaml using ${FEED_STEEM_ACCOUNT} / ${FEED_STEEM_ACTIVE_KEY}.
+    environment:
+      FEED_STEEM_ACCOUNT: ${FEED_STEEM_ACCOUNT:-}
+      FEED_STEEM_ACTIVE_KEY: ${FEED_STEEM_ACTIVE_KEY:-}
+      # Optional: a CryptoCompare API key for the `cryptocompare` price source.
+      CRYPTOCOMPARE_API_KEY: ${CRYPTOCOMPARE_API_KEY:-}
+    # Mount your local config.yaml read-only. Run `cp config.sample.yaml config.yaml`
+    # first so this path exists before starting the stack.
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro

@@ -83,7 +83,12 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-config.yaml
-config.yml
-config.json
+
+# Local runtime configuration (keep your secrets out of git)
+/config.yaml
+/config.yml
+/config.json
+
+# Environment file used by docker-compose
+.env
 
