@@ -83,4 +83,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+config.yaml
+config.yml
 config.json
+
