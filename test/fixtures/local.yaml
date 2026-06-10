@@ -1,0 +1,5 @@
+feed_steem_account: ${FEED_STEEM_ACCOUNT:-local-account}
+feed_steem_active_key: ${FEED_STEEM_ACTIVE_KEY:-}
+exchanges:
+  - poloniex
+  - binance

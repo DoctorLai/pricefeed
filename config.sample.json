@@ -1,0 +1,17 @@
+{
+  "rpc_nodes": [
+    "https://api.steemit.com",
+    "https://api.justyy.com",
+    "https://api2.justyy.com",
+    "https://api3.justyy.com"
+  ],
+  "feed_steem_account": "${FEED_STEEM_ACCOUNT:-}",
+  "feed_steem_active_key": "${FEED_STEEM_ACTIVE_KEY:-}",
+  "exchanges": ["coingecko", "poloniex", "binance", "slowapi", "cloudflare"],
+  "interval": 60,
+  "request_timeout": 20000,
+  "feed_publish_fail_retry": 5,
+  "price_feed_max_retry": 5,
+  "retry_interval": 10,
+  "peg_multi": 1
+}

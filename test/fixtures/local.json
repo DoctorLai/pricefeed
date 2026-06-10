@@ -1,0 +1,5 @@
+{
+  "feed_steem_account": "json-account",
+  "exchanges": ["coingecko", "cryptocompare"],
+  "interval": 42
+}

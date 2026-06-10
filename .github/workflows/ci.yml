@@ -21,5 +21,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build Docker image
-        run: docker build -t pricefeed-test .
+      - name: Create config from sample
+        run: cp config.sample.yaml config.yaml
+      - name: Validate docker compose configuration
+        run: docker compose config
+      - name: Build image with docker compose
+        run: docker compose build
+      - name: Smoke test the docker compose stack
+        run: |
+          docker compose run --rm -T pricefeed \
+            node -e "const { loadConfig } = require('./src/config-loader'); const c = loadConfig(); if (!Array.isArray(c.rpc_nodes) || c.rpc_nodes.length < 3) { console.error('rpc_nodes missing or too few'); process.exit(1); } console.log('docker compose smoke test OK; account =', c.feed_steem_account);"

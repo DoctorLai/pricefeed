@@ -1,0 +1,16 @@
+node_modules
+npm-debug.log*
+
+.git
+.github
+.gitignore
+.gitattributes
+.dockerignore
+
+test
+coverage
+
+# Never bake local secrets into the image
+config.yaml
+config.yml
+.env

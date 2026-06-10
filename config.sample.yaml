@@ -10,7 +10,7 @@ exchanges:
   - binance
   - slowapi
 interval: 15
-feed_publish_interval: 30
+request_timeout: 20000
 feed_publish_fail_retry: 5
 price_feed_max_retry: 5
 retry_interval: 10
