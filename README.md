@@ -3,6 +3,7 @@
 ![image](https://user-images.githubusercontent.com/1764434/173547905-6366f5eb-22dc-4327-bbda-6a4cc4cd3b96.png)
 
 ## Install nodejs & npm
+
 If you already have nodejs & npm installed you can skip this section, but I wanted to include it here for thoroughness. Run the following commands to install nodejs and npm in order to run the pricefeed software:
 
 ```
@@ -12,22 +13,25 @@ $ sudo apt-get install -y nodejs
 ```
 
 ## Setup & Installation
+
 Clone the project repo into the "pricefeed" directory and install using NPM:
 
 ```
 $ git clone https://github.com/DoctorLai/pricefeed.git pricefeed
 $ cd pricefeed
 $ npm install
+$ npm test
 ```
 
-Update the config.json file with your witness account name and private active key as described in the Configuration section below. Alternative, you can set account and private key in environment variables. 
+Update the config.yaml file with your witness account name and private active key as described in the Configuration section below. The loader also supports environment substitution such as ${FEED_STEEM_ACCOUNT:-justyy} and ${FEED_STEEM_ACTIVE_KEY:-}, so you can keep secrets out of the repo.
 
 ### Run in background with PM2
+
 I suggest using the PM2 software to manage and run your nodejs programs in the background. Use the following commands to install PM2 and run the pricefeed program:
 
 ```
 $ sudo npm install pm2 -g
-$ pm2 start feed.js
+$ pm2 start feed.js --name feed
 $ pm2 logs feed
 $ pm2 save
 ```
@@ -35,16 +39,21 @@ $ pm2 save
 If everything worked you should not see any errors in the logs and a price feed transaction should have been published to your account.
 
 ### Run in Docker
+
 If you prefer using Docker, use the following commands:
 
 ```
 # build your own docker image
 docker build -t pricefeed .
 
-# edit config.json and run container
+# also you could use an exist image
+docker pull steemfans/pricefeed
+docker tag steemfans/pricefeed pricefeed
+
+# edit config.yaml and run container
 docker run -itd \
     --name pricefeed \
-    -v $(pwd)/config.json:/app/config.json \
+    -v $(pwd)/config.yaml:/app/config.yaml \
     pricefeed
 
 # Check the status with docker logs
@@ -52,7 +61,29 @@ docker logs pricefeed
 ```
 
 ## Configuration
+
+The runtime now reads `config.yaml` by default (with `config.yml` and `config.json` fallbacks). Example:
+
+```yaml
+rpc_nodes:
+  - https://api.steemit.com
+  - https://api.moecki.online
+feed_steem_account: ${FEED_STEEM_ACCOUNT:-justyy}
+feed_steem_active_key: ${FEED_STEEM_ACTIVE_KEY:-}
+exchanges:
+  - poloniex
+  - binance
+  - slowapi
+interval: 15
+feed_publish_interval: 30
+feed_publish_fail_retry: 5
+price_feed_max_retry: 5
+retry_interval: 10
+peg_multi: 1
+```
+
 List of STEEM RPC nodes to use:
+
 ```
 {
   "rpc_nodes": [
@@ -66,10 +97,9 @@ List of STEEM RPC nodes to use:
     "https://api.steemitdev.com",
     "https://api.justyy.com"
   ],
-  "feed_steem_account": "",                            // Name of your Steem witness account - if left empty, then should be set in env.
-  "feed_steem_active_key": "",		                   // Private active key of your Steem witness account - if left empty, then should be set in env.
-  "coinmarketcap_api_key": "",		                   // API key for CoinMarketCap; required if using "coinmarketcap" in exchange list below. Set in env if empty.
-  "exchanges": ["cloudflare", "coingecko", "cryptocompare", "coinmarketcap"],  // List of exchanges to use. Will publish an average of all exchanges in the list.
+  "feed_steem_account": "${FEED_STEEM_ACCOUNT:-}",   // Name of your Steem witness account; falls back to env if present.
+  "feed_steem_active_key": "${FEED_STEEM_ACTIVE_KEY:-}", // Private active key; also read from env.
+  "exchanges": ["poloniex", "binance", "cloudflare", "slowapi", "coingecko", "cryptocompare"],  // List of exchanges to use. The published price is the average of the enabled sources.
   "interval": 60,									   // Number of minutes between feed publishes
   "feed_publish_interval": 30,                         // Feed published after 30 seconds of price feed
   "feed_publish_fail_retry": 5,                        // RPC node fail over to next after 5 retries

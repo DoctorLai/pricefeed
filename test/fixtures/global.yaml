@@ -1,0 +1,4 @@
+feed_steem_account: global-user
+feed_steem_active_key: global-key
+exchanges:
+  - binance
