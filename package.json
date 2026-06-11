@@ -5,12 +5,13 @@
   "main": "feed.js",
   "scripts": {
     "test": "node --test",
+    "coverage": "c8 --all --include=feed.js --include=src/**/*.js --reporter=text --reporter=lcov --reporter=json-summary --check-coverage --lines=72 --statements=72 --functions=89 --branches=90 node --test",
     "start": "node feed.js",
     "check": "node --check feed.js",
     "lint": "for f in feed.js src/*.js test/*.js; do node --check \"$f\" || exit 1; done",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "ci": "npm run lint && npm run test && npm run format"
+    "ci": "npm run lint && npm run coverage && npm run format"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "yaml": "^2.9.0"
   },
   "devDependencies": {
+    "c8": "^10.1.3",
     "prettier": "^3.8.4"
   }
 }
