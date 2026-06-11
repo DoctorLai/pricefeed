@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/DoctorLai/pricefeed/actions/workflows/ci.yml/badge.svg)](https://github.com/DoctorLai/pricefeed/actions/workflows/ci.yml)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-43853d?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Docker Hub](https://img.shields.io/docker/pulls/justyy/pricefeed?logo=docker&logoColor=white)](https://hub.docker.com/r/justyy/pricefeed)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ![image](https://user-images.githubusercontent.com/1764434/173547905-6366f5eb-22dc-4327-bbda-6a4cc4cd3b96.png)
@@ -115,6 +116,26 @@ $ docker run -itd \
     -v $(pwd)/config.yaml:/app/config.yaml:ro \
     pricefeed
 ```
+
+#### Use the prebuilt image from Docker Hub
+
+A prebuilt image is published to Docker Hub as
+[`justyy/pricefeed`](https://hub.docker.com/r/justyy/pricefeed), so you can skip
+the build step and pull it directly:
+
+```
+$ docker pull justyy/pricefeed:latest
+
+# Edit config.yaml first, then run the container
+$ docker run -itd \
+    --name pricefeed \
+    -v $(pwd)/config.yaml:/app/config.yaml:ro \
+    justyy/pricefeed:latest
+```
+
+The `latest` tag is rebuilt and pushed automatically by CI on every push to the
+`master` branch (see the `docker_push` job in
+[.github/workflows/ci.yml](.github/workflows/ci.yml)).
 
 ### Run with Docker Compose
 
