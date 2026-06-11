@@ -1,7 +1,7 @@
 # Steem Witness Price Feed Publishing Tool
 
 [![CI](https://github.com/DoctorLai/pricefeed/actions/workflows/ci.yml/badge.svg)](https://github.com/DoctorLai/pricefeed/actions/workflows/ci.yml)
-[![Coverage](https://codecov.io/gh/DoctorLai/pricefeed/branch/master/graph/badge.svg)](https://codecov.io/gh/DoctorLai/pricefeed)
+[![Test Coverage](https://github.com/DoctorLai/pricefeed/actions/workflows/coverage.yml/badge.svg)](https://github.com/DoctorLai/pricefeed/actions/workflows/coverage.yml)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-43853d?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/justyy/pricefeed?logo=docker&logoColor=white)](https://hub.docker.com/r/justyy/pricefeed)
 [![Docker Image Size](https://img.shields.io/docker/image-size/justyy/pricefeed/latest?logo=docker&logoColor=white)](https://hub.docker.com/r/justyy/pricefeed/tags)
