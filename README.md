@@ -1,11 +1,15 @@
 # Steem Witness Price Feed Publishing Tool
 
 [![CI](https://github.com/DoctorLai/pricefeed/actions/workflows/ci.yml/badge.svg)](https://github.com/DoctorLai/pricefeed/actions/workflows/ci.yml)
+[![Coverage](https://codecov.io/gh/DoctorLai/pricefeed/branch/master/graph/badge.svg)](https://codecov.io/gh/DoctorLai/pricefeed)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-43853d?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Docker Hub](https://img.shields.io/docker/pulls/justyy/pricefeed?logo=docker&logoColor=white)](https://hub.docker.com/r/justyy/pricefeed)
+[![Docker Pulls](https://img.shields.io/docker/pulls/justyy/pricefeed?logo=docker&logoColor=white)](https://hub.docker.com/r/justyy/pricefeed)
+[![Docker Image Size](https://img.shields.io/docker/image-size/justyy/pricefeed/latest?logo=docker&logoColor=white)](https://hub.docker.com/r/justyy/pricefeed/tags)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ![image](https://user-images.githubusercontent.com/1764434/173547905-6366f5eb-22dc-4327-bbda-6a4cc4cd3b96.png)
+
+Here is the AI-generated [Wiki](https://deepwiki.com/DoctorLai/pricefeed) for this project.
 
 Publishes a STEEM price feed for your witness account. Prices are pulled from
 multiple exchanges, validated, averaged, and broadcast to the Steem blockchain
@@ -64,14 +68,15 @@ test/                   node:test unit tests and fixtures
 
 ## Available scripts
 
-| Script               | Description                                         |
-| -------------------- | --------------------------------------------------- |
-| `npm start`          | Run the price feed.                                 |
-| `npm test`           | Run the unit test suite (`node --test`).            |
-| `npm run lint`       | Syntax-check every source and test file.            |
-| `npm run format`     | Check formatting with Prettier.                     |
-| `npm run format:fix` | Apply Prettier formatting.                          |
-| `npm run ci`         | Run lint, tests, and the format check (used by CI). |
+| Script               | Description                                     |
+| -------------------- | ----------------------------------------------- |
+| `npm start`          | Run the price feed.                             |
+| `npm test`           | Run the unit test suite (`node --test`).        |
+| `npm run coverage`   | Run tests with coverage reports and thresholds. |
+| `npm run lint`       | Syntax-check every source and test file.        |
+| `npm run format`     | Check formatting with Prettier.                 |
+| `npm run format:fix` | Apply Prettier formatting.                      |
+| `npm run ci`         | Run lint, coverage, and the format check.       |
 
 ## Running in production
 
